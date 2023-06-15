@@ -1,10 +1,6 @@
 import React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import "../ui/css/Lobby.css";
@@ -14,6 +10,14 @@ export default function Navs() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (newValue === 'room') {
+      scrollToRoomImage();
+    }
+  };
+
+  const scrollToRoomImage = () => {
+    const roomImageElement = document.getElementById('roomImage');
+    roomImageElement.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -29,51 +33,67 @@ export default function Navs() {
           <Grid item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
             <BottomNavigation
               sx={{
-                width: '100%',
+                width: '70%',
+                height: '70%',
                 display: 'flex',
                 justifyContent: 'center',
+                borderRadius: '20px',
+                marginLeft: '110px',
+                backgroundColor: 'rgba(128, 128, 128, 0.5)',
               }}
               value={value}
               onChange={handleChange}
             >
               <BottomNavigationAction
-                label="Favorites"
-                value="favorites"
-               
+                label="^"
+                value="room"
+                icon="Room & Suits"
+                sx={{ color: 'white' }}
               />
             </BottomNavigation>
           </Grid>
           <Grid item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
             <BottomNavigation
               sx={{
-                width: '100%',
+                width: '50%',
+                height: '70%',
                 display: 'flex',
                 justifyContent: 'center',
+                borderRadius: '20px',
+                marginLeft: '75px',
+                backgroundColor: 'rgba(128, 128, 128, 0.5)',
               }}
               value={value}
               onChange={handleChange}
+              
             >
               <BottomNavigationAction
-                label="Nearby"
-                value="nearby"
-                icon={<LocationOnIcon />}
+                label="^"
+                value="news"
+                icon="News"
+                sx={{ color: 'white' }}
               />
             </BottomNavigation>
           </Grid>
           <Grid item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
             <BottomNavigation
               sx={{
-                width: '100%',
+                width: '50%',
+                height: '70%',
                 display: 'flex',
                 justifyContent: 'center',
+                borderRadius: '20px',
+                marginRight: '50px',
+                backgroundColor: 'rgba(128, 128, 128, 0.5)',
               }}
               value={value}
               onChange={handleChange}
             >
               <BottomNavigationAction
-                label="Folder"
-                value="folder"
-                icon={<FolderIcon />}
+                label="^"
+                value="pages"
+                icon="Pages"
+                sx={{ color: 'white' }}
               />
             </BottomNavigation>
           </Grid>

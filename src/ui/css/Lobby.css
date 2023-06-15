@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+  }
+
 .bg{
     background-image: url("/img/hotel-lobby.jfif");
     background-size: cover;
@@ -15,7 +19,8 @@
     position: fixed;
     top: 0;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 30px;
+    z-index: 1;
 }
 .navs img{
     max-width: 50px;
@@ -23,5 +28,70 @@
     margin-left: 30px;
 }
 body{
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
+.textcard {
+    position: absolute;
+    left: 5%;
+    top: 20%;
+}
+
+.textcard {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.textcard.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/*Room Image*/
+
+.room-card {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    border: 10px solid rgb(207,226,221);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    color: black;
+    background-color: rgb(207,207,207);
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .room-image {
+    height: 150px;
+    border-radius: 8px;
+    
+    
+  }
+  
+  .room-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 20px;
+  }
+  
+  .room-description {
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-left: 20px;
+  }
+  
+  .room-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 50px 50px 0px 50px;
+  }
+  
+  /* lobby pages */
+  .list{
+    margin-top: 20px;
+  }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../ui/css/LoginFormCard.css"
 
 const LoginFormCard = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showCard, setShowCard] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -12,9 +12,19 @@ const LoginFormCard = () => {
   const [registerName, setRegisterName] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
 
-  const handleClick = () => {
-    setShowForm(true);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCard(true);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (!showCard) {
+    return null;
+  }
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -55,6 +65,7 @@ const LoginFormCard = () => {
     console.log('Email:', loginEmail);
     console.log('Password:', loginPassword);
     console.log('Remember Me:', rememberMe);
+    
   };
 
   const handleRegisterSubmit = (event) => {
@@ -68,7 +79,7 @@ const LoginFormCard = () => {
 
   return (
     
-    <div className={`floating-form ${showForm ? 'show' : ''}`} onClick={handleClick}>
+    <div className={`floating-form ${showCard ? 'show' : ''}`}>
       <div className="tabs">
         <div
           className={`tab ${activeTab === 'login' ? 'active' : ''}`}

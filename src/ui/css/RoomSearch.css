@@ -1,0 +1,74 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.room-search {
+    position: fixed;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 900px;
+    height: 10%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    z-index: 1;
+  }
+
+  .room-search.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .room-search h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .room-search label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .room-search input[type="date"],
+  .room-search button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .room-search button {
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 10px;
+  }
+  
+  .room-search span {
+    margin-left: 5px;
+    display: flex;
+  }
+  
+  .room-search button:focus,
+  .room-search input[type="date"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .room-search button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .room-search button:active {
+    background-color: #ccc;
+  }
+  

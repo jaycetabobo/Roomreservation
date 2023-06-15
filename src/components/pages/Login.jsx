@@ -1,6 +1,7 @@
 import React from 'react'
 import VideoBackground from '../../ui/VideoBackground';
 import LoginFormCard from '../../ui/LoginFormCard';
+import "../css/Login.css"
 
 
 export default function Login() {
