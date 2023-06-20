@@ -4,6 +4,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import "../ui/css/Lobby.css";
+import DropdownAvatar from './DropdownAvatar';
 
 export default function Navs() {
   const [value, setValue] = React.useState('recents');
@@ -28,6 +29,9 @@ export default function Navs() {
               <img src="/hotel-logo.svg" alt="logo" />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+            
+          </Grid>
+          <Grid item xs={1} sm={1} md={1} lg={1} xl={1} xxl={1}>
             
           </Grid>
           <Grid item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
@@ -69,36 +73,18 @@ export default function Navs() {
             >
               <BottomNavigationAction
                 label="^"
-                value="news"
-                icon="News"
+                value="roomlist"
+                icon="Room List"
                 sx={{ color: 'white' }}
               />
             </BottomNavigation>
           </Grid>
-          <Grid item xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
-            <BottomNavigation
-              sx={{
-                width: '50%',
-                height: '70%',
-                display: 'flex',
-                justifyContent: 'center',
-                borderRadius: '20px',
-                marginRight: '50px',
-                backgroundColor: 'rgba(128, 128, 128, 0.5)',
-              }}
-              value={value}
-              onChange={handleChange}
-            >
-              <BottomNavigationAction
-                label="^"
-                value="pages"
-                icon="Pages"
-                sx={{ color: 'white' }}
-              />
-            </BottomNavigation>
+          <Grid item xs={1} sm={1} md={1} lg={1} xl={1} xxl={1}>
+             <DropdownAvatar />
           </Grid>
         </Grid>
       </Box>
+      
     </div>
   );
 }

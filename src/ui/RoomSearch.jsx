@@ -47,7 +47,7 @@ const RoomSearch = () => {
     const scrollPosition = window.pageYOffset;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    const bottomThreshold = documentHeight - windowHeight - 20;
+    const bottomThreshold = documentHeight - windowHeight - 200;
 
     if (scrollPosition > bottomThreshold) {
       setIsHidden(true);
@@ -67,30 +67,32 @@ const RoomSearch = () => {
   };
 
   return (
+    <>
     <div className={`room-search ${isHidden ? 'hidden' : ''}`}>
-      <h2>Room Search</h2>
-      <label>
-        Check-in Date:
-        <input type="date" value={checkinDate} onChange={handleCheckinDateChange} />
-      </label>
-      <label>
-        Check-out Date:
-        <input type="date" value={checkoutDate} onChange={handleCheckoutDateChange} />
-      </label>
-      <label>
-        Adults:
-        <button onClick={incrementAdults} style={{fontSize: "7px"}}>+</button>
-        <span>{adults}</span>
-        <button onClick={decrementAdults}>-</button>
-      </label>
-      <label>
-        Children:
-        <button onClick={incrementChildren} style={{fontSize: "7px"}}>+</button>
-        <span>{children}</span>
-        <button onClick={decrementChildren}>-</button>
-      </label>
-      <button onClick={handleSearch}>Search</button>
+    <h2 style={{paddingRight: '10px', paddingLeft: '10px'}}></h2>
+    <label>
+      Check-in Date:
+      <input type="date" value={checkinDate} onChange={handleCheckinDateChange} style={{width: '100px', marginRight:'10px'}} />
+    </label>
+    <label>
+      Check-out Date:
+      <input type="date" value={checkoutDate} onChange={handleCheckoutDateChange} style={{width: '100px', marginRight:'10px'}}/>
+    </label>
+    <label style={{marginRight:'10px', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+      Adults:
+      <button onClick={incrementAdults} style={{width: '30px', backgroundColor: 'white', color: 'black'}}>+</button>
+      <span>{adults}</span>
+      <button onClick={decrementAdults} style={{width: '30px', backgroundColor: 'white', color: 'black'}}>-</button>
+    </label>
+    <label style={{marginRight:'10px', display: 'flex', flexDirection: 'row'}}>
+      Children:
+      <button onClick={incrementChildren} style={{width: '30px', backgroundColor: 'white', color: 'black'}}>+</button>
+      <span>{children}</span>
+      <button onClick={decrementChildren} style={{width: '30px', backgroundColor: 'white', color: 'black'}}>-</button>
+    </label>
+    <button onClick={handleSearch} style={{width: '100px', fontSize: '10px'}}>Search</button>
     </div>
+  </>
   );
 };
 

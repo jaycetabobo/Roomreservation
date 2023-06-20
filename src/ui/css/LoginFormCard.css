@@ -66,12 +66,12 @@ p{
     border-radius: 50px;
 }
 body{
-    background-color: black;
+    background-color: white;
 }
 
 .floating-form {
     position: absolute;
-    top: 92%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;

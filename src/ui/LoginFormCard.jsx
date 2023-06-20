@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "../ui/css/LoginFormCard.css"
+import { useNavigate } from 'react-router-dom';
 
 const LoginFormCard = () => {
+  const navigate = useNavigate();
   const [showCard, setShowCard] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
   const [loginEmail, setLoginEmail] = useState('');
@@ -65,6 +67,7 @@ const LoginFormCard = () => {
     console.log('Email:', loginEmail);
     console.log('Password:', loginPassword);
     console.log('Remember Me:', rememberMe);
+    navigate('/lobby');
     
   };
 
@@ -129,7 +132,7 @@ const LoginFormCard = () => {
                 Remember&nbsp;Me
               </label>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" >Login</button>
             <div className="forgot-password">
               <a href="/forgot-password">Forgot Password?</a>
             </div>
