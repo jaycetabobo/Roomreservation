@@ -74,7 +74,7 @@ const Roomsinfo = () => {
 
   const description = 'Experience the epitome of business sophistication at the Ritz Hotels Business Executive Room. This thoughtfully designed space caters to the needs of discerning professionals, combining efficiency with luxurious comfort. Unwind in the serene ambiance of a king-sized bed adorned with plush linens, offering a peaceful retreat from the demands of the business world. The room features a spacious work desk equipped with essential amenities and high-speed Wi-Fi for seamless connectivity. Take advantage of the en-suite bathroom, boasting modern fixtures and premium toiletries, providing convenience and indulgence. Whether you need a space for focused work or moments of relaxation, the Business Executive Room offers a perfect balance. Our attentive staff is dedicated to providing exceptional service, ensuring your stay is both productive and pleasurable at the Ritz Hotels Business Executive Room.';
 
-  const words = ['Word1', 'Word2', 'Word3', 'Word4'];
+  const words = ['Individually controlled AC', 'Private bathroom', 'Private sauna', 'Cable TV', 'Mini bar', 'Coffee and Tea making facilities'];
 
   return (
     <Container maxWidth="md" style={styles.container}>
@@ -112,11 +112,9 @@ const Roomsinfo = () => {
         </Grid>
       </Card>
 
-      <Card style={{ ...styles.card, display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained" color="primary" style={{ ...styles.button, width: '100px', borderRadius: '20px'}}>
-          Reserve
-        </Button>
-      </Card>
+      <Button variant="contained" color="primary" style={{ ...styles.button, width: '100px', borderRadius: '20px' }}>
+        Reserve
+      </Button>
     </Container>
   );
 };
