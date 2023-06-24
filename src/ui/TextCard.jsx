@@ -49,7 +49,7 @@ export default function TextCard() {
         </Typography>
       </CardContent>
       <CardContent sx={{display: 'flex', justifyContent: 'center'}}>
-        <Button variant="outlined" sx={{color: 'white', borderColor: 'white', borderRadius: '10px'}}>More Info</Button>
+        <Button variant="outlined" sx={{color: 'white', borderColor: 'white', borderRadius: '10px', width: '40%'}}>More Info</Button>
       </CardContent>
     </Card>
     </div>

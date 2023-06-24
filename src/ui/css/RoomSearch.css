@@ -7,10 +7,10 @@ body{
 }
 .room-search {
     position: fixed;
-    bottom: 5px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 700px;
+    width: 450px;
     height: 10%;
     margin: 0 auto;
     padding: 20px;

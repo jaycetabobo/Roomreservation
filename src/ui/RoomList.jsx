@@ -1,57 +1,81 @@
-import React from 'react';
-import '../ui/css/Lobby.css'
+import React, { useState, useRef, useEffect } from 'react';
+import '../ui/css/Lobby.css';
+import RoomImage from './RoomImage';
 
-function RoomCard({ image, name, description, price }) {
-  return (
-    <div className="room-card">
-      <img src={image} alt={name} className="room-image" />
-      <div className="room-details">
-        <h3 className="room-name">{name}</h3>
-        <p className="room-description">{description}</p>
-        <p className="room-price">${price}</p>
-      </div>
-    </div>
-  );
-}
 
-function RoomList() {
+function RoomList({ searchOptions }) {
+  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [visibleRooms, setVisibleRooms] = useState([]);
+  const roomHeaderRef = useRef(null); // Ref for the <p> tag containing "Rooms"
+
   const rooms = [
     {
       image: "/img/room1.jpg",
       name: "De Luxe Room",
-      description: "2 adults | 1 child below 7",
-      price: "99900"
+      description: "4 adults | 1 child",
+      price: "50"
     },
     {
       image: "/img/room1.jpg",
       name: "De Luxe Room",
-      description: "2 adults | 1 child below 7",
-      price: "99900"
+      description: "2 adults | 2 child",
+      price: "111"
     },
     {
       image: "/img/room1.jpg",
       name: "De Luxe Room",
-      description: "2 adults | 1 child below 7",
-      price: "99900"
+      description: "7 adults | 5 child",
+      price: "500"
     },
     {
       image: "/img/room1.jpg",
       name: "De Luxe Room",
-      description: "2 adults | 1 child below 7",
-      price: "99900"
+      description: "1 adults | 5 child",
+      price: "200"
     },
   ];
 
+  useEffect(() => {
+    if (searchOptions) {
+      const filtered = rooms.filter(room => {
+        const isPriceInRange =
+          parseInt(room.price) >= searchOptions.priceRange[0] &&
+          parseInt(room.price) <= searchOptions.priceRange[1];
+        return isPriceInRange;
+      });
+
+      setFilteredRooms(filtered);
+    }
+  }, [searchOptions]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setVisibleRooms(filteredRooms);
+
+      if (roomHeaderRef.current) {
+        roomHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [filteredRooms]);
+
+  if (!searchOptions) {
+    return null;
+  }
+
   return (
-    <div className="lobbycss" id="roomImage">
+    <div className="lobbycss" id="roomImage" style={{ display: 'flex', flexDirection: 'column' }}>
+      <h5 ref={roomHeaderRef} style={{display: 'flex',justifyContent: 'start', marginTop: '20px'}}>SEARCHED ROOM:</h5>
       <div className="room-grid">
-        {rooms.map((room, index) => (
+        {filteredRooms.map((room, index) => (
           <div className="card" key={index}>
-            <RoomCard
+            <RoomImage
               image={room.image}
               name={room.name}
               description={room.description}
               price={room.price}
+              isVisible={visibleRooms.includes(room)}
             />
           </div>
         ))}

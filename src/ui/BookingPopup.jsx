@@ -13,14 +13,12 @@ import {
 } from "@mui/material";
 import { DateRange } from "react-date-range";
 import { getDate } from "date-fns";
-import { AuthContext } from "../context/AuthContext";
-import { LoadingSpinner } from "../components/LoadingSpinner";
+import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-hot-toast";
 import { bookModalStyle } from "../helper/styles";
 import { useNavigate } from "react-router-dom";
 
-export const BookingModal = ({ open, handleClose, hotelInfo }) => {
-  const { currentUser } = useContext(AuthContext);
+export const BookingPopup = ({ open, handleClose }) => {
   const navigate = useNavigate();
   const [guests, setGuests] = useState();
   const [selectedGuestCount, setSelectedGuestCount] = useState(1);
@@ -62,12 +60,13 @@ export const BookingModal = ({ open, handleClose, hotelInfo }) => {
 
   const handleReserve = async () => {
     setIsLoading(true);
+    const currentUser = { uid: 'dummyUid', displayName: 'Dummy User' }; // Dummy currentUser object
     const { uid, displayName } = currentUser;
     // Simulating data submission to a database
     setTimeout(() => {
       toast.success("Booking successful");
       handleClose();
-      navigate("/my-profile");
+      navigate("/book-history");
       setIsLoading(false);
     }, 2000);
   };
@@ -83,24 +82,6 @@ export const BookingModal = ({ open, handleClose, hotelInfo }) => {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           $120 /night
         </Typography>
-        <FormControl fullWidth sx={{ marginTop: 3 }}>
-          <InputLabel id="demo-simple-select-label">
-            Number of Guests
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selectedGuestCount}
-            label="Number of Adults"
-            onChange={handleChange}
-          >
-            {guests?.map((guest) => (
-              <MenuItem key={guest} value={guest}>
-                {guest}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         <InputLabel>Select Dates</InputLabel>
         <DateRange
           className="date-range"
@@ -148,7 +129,7 @@ export const BookingModal = ({ open, handleClose, hotelInfo }) => {
         >
           Subtotal: $
           {dates[0]?.endDate
-            ? 120 * getTotalNightsBooked()
+            ? 120 * 1
             : 0}
         </Typography>
         <Button
