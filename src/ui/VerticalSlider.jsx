@@ -3,11 +3,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import '../ui/css/Slider.css';
-
 import { EffectCards } from 'swiper';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const VerticalSlider = () => {
   const [showSlider, setShowSlider] = useState(true);
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const querySnapshot = await getDocs(collection(db, 'room'));
+      const roomURLs = querySnapshot.docs.map((doc) => doc.data().roomURL);
+      setRooms(roomURLs);
+    };
+
+    fetchRooms();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,13 +43,13 @@ const VerticalSlider = () => {
   return (
     <div className={`slider ${showSlider ? 'show' : ''}`}>
       <Swiper effect="cards" grabCursor={true} modules={[EffectCards]} className="mySwiper">
-        <SwiperSlide>
-          <a href=""><img src="/img/room1-t.jpg" alt="" /></a>
-        </SwiperSlide>
-        <SwiperSlide><img src="/img/room2.jpg" alt="" style={{}}/></SwiperSlide>
-        <SwiperSlide><img src="/img/room3.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="/img/room4.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="/img/room5.jpg" alt="" /></SwiperSlide>
+        {rooms.map((roomURL, index) => (
+          <SwiperSlide key={index}>
+            <a style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <img src={roomURL} alt="" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </a>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

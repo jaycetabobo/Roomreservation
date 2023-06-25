@@ -1,16 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import DropdownAvatar from './DropdownAvatar';
-import { useNavigate } from "react-router-dom";
+import '../ui/css/DropdownAvatar.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../ui/css/Lobby.css';
+import { auth } from "../lib/firebase";
+import { Avatar } from "@mui/material";
+import { AuthContext } from '../context/AuthContext';
+import { signOut } from "firebase/auth";
 
 export default function Navs() {
   const [value, setValue] = useState('recents');
   const [hideNav, setHideNav] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    await auth.signOut().then(() => navigate("/"));
+  };
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -85,7 +100,21 @@ export default function Navs() {
             </BottomNavigation>
           </Grid>
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1} xxl={1}>
-            <DropdownAvatar />
+          <div className="dropdown">
+       <Avatar
+          src={currentUser?.photoURL}
+          sx={{ width: 35, height: 35 }}
+          onClick={toggleDropdown}
+        />
+      {isOpen && (
+        <div className="dropdown-content">
+          <a href="/book-history">My Profile</a>
+          <button onClick={handleLogout} style={{}}>
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
           </Grid>
         </Grid>
       </Box>

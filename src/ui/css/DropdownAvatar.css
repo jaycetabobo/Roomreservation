@@ -3,13 +3,13 @@
     display: inline-block;
   }
   
-  .avatar {
+  /* .avatar {
+    border-radius: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
     background-color: #ccc;
     cursor: pointer;
-  }
+  } */
   
   .dropdown-content {
     position: absolute;

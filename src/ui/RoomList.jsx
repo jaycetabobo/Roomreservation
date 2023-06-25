@@ -1,7 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../ui/css/Lobby.css';
-import RoomImage from './RoomImage';
 
+const RoomImage = ({ image, name, description, price, isVisible}) => {
+  const cardStyle = {
+    opacity: isVisible ? 1 : 0,
+    transform: `translateX(${isVisible ? '0%' : '-100%'})`,
+    transition: 'opacity 0.5s, transform 0.5s',
+  };
+  return (
+    <div className="room-card" style={cardStyle}>
+      <img src={image} alt={name} className="room-image" />
+      <div className="room-details">
+        <h3 className="room-name">{name}</h3>
+        <p className="room-description">{description}</p>
+        <p className="room-price">${price} a night</p>
+      </div>
+    </div>
+  );
+};
 
 function RoomList({ searchOptions }) {
   const [filteredRooms, setFilteredRooms] = useState([]);

@@ -34,7 +34,7 @@ const RoomSearch = ({ onSearch, onSearchClick }) => {
 
   return (
     <div className={`room-search ${visible ? '' : 'hidden'}`}>
-      <h6 style={{ marginRight: '20px' }}>Price Range: {priceRange[0]} - {priceRange[1]}</h6>
+      <h6 style={{ marginRight: '20px', color: 'black' }}>Price Range: {priceRange[0]} - {priceRange[1]}</h6>
       <label>
         <input
           type="range"
@@ -42,7 +42,7 @@ const RoomSearch = ({ onSearch, onSearchClick }) => {
           max="1000"
           value={priceRange[1]}
           onChange={handlePriceChange}
-          style={{ width: '100px', marginRight: '10px' }}
+          style={{ width: '100px', marginRight: '10px' , color: 'black'}}
         />
       </label>
       <button onClick={handleSearch} style={{ width: '100px', fontSize: '15px', borderRadius: '20px' }}>Search</button>
