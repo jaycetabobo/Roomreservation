@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { BookingPopup } from '../../ui/BookingPopup';
 import { Toaster } from "react-hot-toast";
 import Navs from '../../ui/Navs';
-
+import RoomList from '../../ui/RoomList'; // Import the RoomList component
 
 const styles = {
   container: {
@@ -85,50 +85,53 @@ const Rooms = () => {
 
   const words = ['Individually controlled AC', 'Private bathroom', 'Private sauna', 'Cable TV', 'Mini bar', 'Coffee and Tea making facilities'];
 
+  // Define the ID that will be passed to the RoomList component
+  const roomId = 'RLkP8n7w8EqT5yaZaB6u';
+
   return (
     <>
-    <Navs />
-    <Container maxWidth="md" style={styles.container}>
-      <Card style={styles.card}>
-        <Slider {...settings} ref={sliderRef}>
-          {images.map((image, index) => (
-            <div key={index}>
+      <Navs />
+      <Container maxWidth="md" style={styles.container}>
+        <Card style={styles.card}>
+          <Slider {...settings} ref={sliderRef}>
+            {images.map((image, index) => (
+              <div key={index}>
                 <img src={image} alt={`Image ${index}`} style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '4px' }} />
-            </div>
-          ))}
-        </Slider>
-      </Card>
+              </div>
+            ))}
+          </Slider>
+        </Card>
 
-      <Typography variant="h2" style={styles.title}>
-        Business Executive Room
-      </Typography>
-
-      <Card style={{ ...styles.card, height: 'fit-content' }}>
-        <Typography variant="body1" style={styles.description}>
-          {description}
+        <Typography variant="h2" style={styles.title}>
+          Business Executive Room
         </Typography>
-      </Card>
 
-      <Typography variant="h2" style={styles.title}>
-        AMENITIES
-      </Typography>
+        <Card style={{ ...styles.card, height: 'fit-content' }}>
+          <Typography variant="body1" style={styles.description}>
+            {description}
+          </Typography>
+        </Card>
 
-      <Card style={{ ...styles.card, display: 'flex', justifyContent: 'center' }}>
-        <Grid container spacing={2}>
-          {words.map((word, index) => (
-            <Grid item xs={4} key={index}>
-              <Typography variant="body1" style={{display: 'flex', justifyContent: 'center'}}>{word}</Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </Card>
+        <Typography variant="h2" style={styles.title}>
+          AMENITIES
+        </Typography>
 
-      <Button onClick={handleOpen} variant="contained" color="primary" style={{ ...styles.button, width: '100px', borderRadius: '20px' }}>
-        Reserve
-      </Button>
-    </Container>
-    <BookingPopup open={open} handleClose={handleClose} />
-    <Toaster
+        <Card style={{ ...styles.card, display: 'flex', justifyContent: 'center' }}>
+          <Grid container spacing={2}>
+            {words.map((word, index) => (
+              <Grid item xs={4} key={index}>
+                <Typography variant="body1" style={{ display: 'flex', justifyContent: 'center' }}>{word}</Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+
+        <Button onClick={handleOpen} variant="contained" color="primary" style={{ ...styles.button, width: '100px', borderRadius: '20px' }}>
+          Reserve
+        </Button>
+      </Container>
+      <BookingPopup open={open} handleClose={handleClose} />
+      <Toaster
         position="top-right"
         toastOptions={{
           duration: 1500,

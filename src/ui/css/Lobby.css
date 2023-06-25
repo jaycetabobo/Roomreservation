@@ -51,7 +51,7 @@ body{
 .room-card {
     display: flex;
     flex-direction: row;
-    width: 520px;
+    width: 540px;
     border: 10px solid rgb(207,226,221);
     border-radius: 8px;
     padding: 16px;
@@ -82,13 +82,13 @@ body{
   .room-description {
     font-size: 14px;
     margin-bottom: 8px;
-    margin-left: 40px;
+    margin-left: 20px;
   }
   
   .room-price {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    margin: 50px 50px 20px 50px;
+    margin: 50px 0px 0px 50px;
   }
   
   /* lobby pages */
@@ -102,7 +102,7 @@ body{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    max-width: 1060px;
+    width: 1100px;
     margin-top: 20px;
 
   }

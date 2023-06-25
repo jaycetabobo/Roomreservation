@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../ui/css/RoomSearch.css';
 
 const RoomSearch = ({ onSearch, onSearchClick }) => {

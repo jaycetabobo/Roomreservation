@@ -1,17 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+import { Link } from 'react-router-dom';
 import '../ui/css/Lobby.css';
 
-const RoomImage = ({ image, name, description, price, isVisible}) => {
+const RoomImage = ({ id, image, name, description, price, isVisible }) => {
   const cardStyle = {
     opacity: isVisible ? 1 : 0,
     transform: `translateX(${isVisible ? '0%' : '-100%'})`,
     transition: 'opacity 0.5s, transform 0.5s',
   };
+  const imageStyle = {
+    width: '300px',
+    height: '200px',
+    objectFit: 'cover',
+    borderRadius: '20px'
+  };
+
   return (
     <div className="room-card" style={cardStyle}>
-      <img src={image} alt={name} className="room-image" />
+      <img src={image} alt={name} style={imageStyle} />
       <div className="room-details">
-        <h3 className="room-name">{name}</h3>
+        <h3 className="room-name">
+          <Link to={`/room/${id}`}>{name}</Link>
+        </h3>
         <p className="room-description">{description}</p>
         <p className="room-price">${price} a night</p>
       </div>
@@ -22,59 +34,54 @@ const RoomImage = ({ image, name, description, price, isVisible}) => {
 function RoomList({ searchOptions }) {
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [visibleRooms, setVisibleRooms] = useState([]);
-  const roomHeaderRef = useRef(null); // Ref for the <p> tag containing "Rooms"
-
-  const rooms = [
-    {
-      image: "/img/room1.jpg",
-      name: "De Luxe Room",
-      description: "4 adults | 1 child",
-      price: "50"
-    },
-    {
-      image: "/img/room1.jpg",
-      name: "De Luxe Room",
-      description: "2 adults | 2 child",
-      price: "111"
-    },
-    {
-      image: "/img/room1.jpg",
-      name: "De Luxe Room",
-      description: "7 adults | 5 child",
-      price: "500"
-    },
-    {
-      image: "/img/room1.jpg",
-      name: "De Luxe Room",
-      description: "1 adults | 5 child",
-      price: "200"
-    },
-  ];
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
+  const roomHeaderRef = useRef(null);
+  const roomGridRef = useRef(null);
 
   useEffect(() => {
-    if (searchOptions) {
-      const filtered = rooms.filter(room => {
-        const isPriceInRange =
-          parseInt(room.price) >= searchOptions.priceRange[0] &&
-          parseInt(room.price) <= searchOptions.priceRange[1];
-        return isPriceInRange;
-      });
+    const fetchRooms = async () => {
+      const roomsRef = collection(db, 'room');
+      const querySnapshot = await getDocs(roomsRef);
+      const rooms = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setFilteredRooms(rooms);
+      setVisibleRooms(rooms);
+    };
 
-      setFilteredRooms(filtered);
-    }
-  }, [searchOptions]);
+    fetchRooms();
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setVisibleRooms(filteredRooms);
-
       if (roomHeaderRef.current) {
         roomHeaderRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [filteredRooms]);
+  }, []);
+
+  useEffect(() => {
+    if (searchOptions) {
+      const fetchFilteredRooms = async () => {
+        const roomsRef = collection(db, 'room');
+        const q = query(
+          roomsRef,
+          where('roomPrice', '>=', searchOptions.priceRange[0]),
+          where('roomPrice', '<=', searchOptions.priceRange[1])
+        );
+        const querySnapshot = await getDocs(q);
+        const rooms = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setFilteredRooms(rooms);
+        setVisibleRooms(rooms);
+      };
+
+      fetchFilteredRooms();
+    }
+  }, [searchOptions]);
+
+  const handleRoomClick = (id) => {
+    setSelectedRoomId(id);
+  };
 
   if (!searchOptions) {
     return null;
@@ -82,16 +89,20 @@ function RoomList({ searchOptions }) {
 
   return (
     <div className="lobbycss" id="roomImage" style={{ display: 'flex', flexDirection: 'column' }}>
-      <h5 ref={roomHeaderRef} style={{display: 'flex',justifyContent: 'start', marginTop: '20px'}}>SEARCHED ROOM:</h5>
-      <div className="room-grid">
+      <h5 ref={roomHeaderRef} style={{ display: 'flex', justifyContent: 'start', marginTop: '20px' }}>
+        SEARCHED ROOM:
+      </h5>
+      <div className="room-grid" ref={roomGridRef}>
         {filteredRooms.map((room, index) => (
           <div className="card" key={index}>
             <RoomImage
-              image={room.image}
-              name={room.name}
-              description={room.description}
-              price={room.price}
+              id={room.id}
+              image={room.roomURL}
+              name={room.roomName}
+              description={room.roomDescription}
+              price={room.roomPrice}
               isVisible={visibleRooms.includes(room)}
+              onClick={handleRoomClick}
             />
           </div>
         ))}
