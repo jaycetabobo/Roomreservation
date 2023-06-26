@@ -66,7 +66,7 @@ export default function Navs() {
             <img 
             src="/hotel-logo.svg" 
             alt="logo"
-            style={{ width: '80px' }}
+            style={{ width: '65px' }}
             />
           </Grid>
           <Grid item xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
@@ -79,7 +79,7 @@ export default function Navs() {
             <BottomNavigation
               sx={{
                 width: '70%',
-                height: '50%',
+                height: '70%',
                 display: 'flex',
                 justifyContent: 'center',
                 borderRadius: '20px',
@@ -94,7 +94,7 @@ export default function Navs() {
                 label="^"
                 value="room"
                 icon="Room & Suits"
-                sx={{ color: 'white' }}
+                sx={{ color: 'white'}}
                 
               />
             </BottomNavigation>
@@ -103,12 +103,12 @@ export default function Navs() {
           <div className="dropdown">
        <Avatar
           src={currentUser?.photoURL}
-          sx={{ width: 35, height: 35 }}
+          sx={{ width: 45, height: 45 }}
           onClick={toggleDropdown}
         />
       {isOpen && (
         <div className="dropdown-content">
-          <button onClick={'/book-history'} style={{border:'none'}}>My Profile</button>
+          <button onClick={'/book-history'} style={{border:'none', backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>My Profile</button>
           <button onClick={handleLogout} style={{border:'none'}}>
             Logout
           </button>

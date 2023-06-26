@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import { BookingPopup } from '../../ui/BookingPopup';
 import { Toaster } from "react-hot-toast";
 import Navs from '../../ui/Navs';
-import RoomList from '../../ui/RoomList'; // Import the RoomList component
 
 const styles = {
   container: {
@@ -85,8 +84,6 @@ const Rooms = () => {
 
   const words = ['Individually controlled AC', 'Private bathroom', 'Private sauna', 'Cable TV', 'Mini bar', 'Coffee and Tea making facilities'];
 
-  // Define the ID that will be passed to the RoomList component
-  const roomId = 'RLkP8n7w8EqT5yaZaB6u';
 
   return (
     <>
