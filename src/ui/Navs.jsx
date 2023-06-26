@@ -25,6 +25,9 @@ export default function Navs() {
   const handleLogout = async () => {
     await auth.signOut().then(() => navigate("/"));
   };
+  const handleProfile = () => {
+    navigate("/book-history");
+  };
 
 
   const handleChange = (event, newValue) => {
@@ -108,7 +111,7 @@ export default function Navs() {
         />
       {isOpen && (
         <div className="dropdown-content">
-          <button onClick={'/book-history'} style={{border:'none', backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>My Profile</button>
+          <button onClick={handleProfile} style={{border:'none', backgroundColor:'white'}}>My Profile</button>
           <button onClick={handleLogout} style={{border:'none'}}>
             Logout
           </button>
