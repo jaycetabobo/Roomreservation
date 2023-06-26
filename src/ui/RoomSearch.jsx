@@ -45,7 +45,7 @@ const RoomSearch = ({ onSearch, onSearchClick }) => {
           style={{ width: '100px', marginRight: '10px' , color: 'black'}}
         />
       </label>
-      <button onClick={handleSearch} style={{ width: '100px', fontSize: '15px', borderRadius: '20px', backgroundColor:'rgba(128, 128, 128, 0.5)'}}>Search</button>
+      <button onClick={handleSearch} style={{ width: '100px', fontSize: '15px', borderRadius: '20px' }}>Search</button>
     </div>
   );
 };
