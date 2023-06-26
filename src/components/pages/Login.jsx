@@ -35,7 +35,7 @@ export default function Login() {
       </style>
       <div className={`login-text ${hideLogoText ? 'hide' : ''}`}>
         <div className='logo-text'>
-          <img className='logo' src="../public/hotel-logo.svg" alt="Logo" />
+          <img className='logo' src="/hotel-logo.svg" alt="Logo" />
           <p>WELCOME TO</p>
           <h1>RITZ HOTEL</h1>
           <h1>ROOM RESERVATION</h1>

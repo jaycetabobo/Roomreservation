@@ -108,8 +108,8 @@ export default function Navs() {
         />
       {isOpen && (
         <div className="dropdown-content">
-          <a href="/book-history">My Profile</a>
-          <button onClick={handleLogout} style={{}}>
+          <button onClick={'/book-history'} style={{border:'none'}}>My Profile</button>
+          <button onClick={handleLogout} style={{border:'none'}}>
             Logout
           </button>
         </div>

@@ -13,7 +13,7 @@ export default function AppRoute() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/lobby" element={<PrivateRoute component={Lobby} />} />
-          <Route path="/room/:id" element={<PrivateRoute component={Rooms} />} /> {/* New route for room details */}
+          <Route path="/room" element={<PrivateRoute component={Rooms} />} /> {/* New route for room details */}
           <Route path="/book-history" element={<PrivateRoute component={Bookhistory} />} />
         </Routes>
       </BrowserRouter>
